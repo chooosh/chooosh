@@ -1,0 +1,55 @@
+
+<회원가입, 팀원찾기 게시판>
+
+
+## 필요 테이블
+회원가입
+memberId varchar2(20)
+memberPw varchar2(20)
+name varchar2(20)
+email varchar2(40)
+mobile varchar2(15)
+grade varchar2(10)
+restCount varchar2(5)
+-- 가입일..?
+
+팀원찾기
+find_no int(5)
+find_title varchar2(60)
+find_writer varchar2(20)
+find_adress varchar2(60)
+find_position varchar2(20)
+find_img varchar2(?)
+find_content varchar2(1500)
+-- img??
+
+## 필요 클래스
+
+- com.sideOn.dto
+	>> Member
+	>> FindMember
+
+- com.sideOn.controller
+	>> MemberController
+	>> FindController
+
+- com.sideOn.dao
+	>> Member
+	>> FindMember
+
+- com.sideOn.service
+	>> Member	
+	>> FindMember
+	
+- com.sideOn.interceptor
+	>> BeforeActionInterceptor
+	>> NeedToLoginInterceptor
+	>> NeedToLogoutInterceptor
+	>> NeedToAdminInterceptor
+
+- com.sideOn.config 의 기능???... 
+
+## jsp
+- join (여기서 1차로 로그인유무 검증)
+- joinForm 
+- findMember
