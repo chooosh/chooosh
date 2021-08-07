@@ -1,7 +1,4 @@
 
-drop table toy_member cascade constraints purge;
-drop table find_member cascade constraints purge;
-
 create table sideOn_member (
 	memberId varchar2(20) not null,
 	memberPw varchar2(20) not null,
@@ -17,8 +14,7 @@ create table sideOn_member (
     
 create table find_member (
     find_no Int primary key,
-    find_title varchar2(60) not null,
-    find_writer varchar2(20) not null,
+    find_title varchar2(60) not null,  find_writer varchar2(20) not null,
     find_adress varchar2(60) not null,
     find_position varchar2(20), 
     find_imgpath varchar2(500),
