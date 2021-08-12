@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.side_on.dao.MemberDao">
+	<!-- public String login(String memberId, String memberPw); -->
+	<select id="login" resultType="String" parameterType="map">
+		select grade 
+		from member 
+		where member_id = #{memberId} and member_pw = #{memberPw}
+	</select>
+	
+	<!-- public Member loginToMember(String memberId, String memberPw) -->
+	<select id="loginToMember" resultType="com.side_on.dto.Member" parameterType="map">
+		select * 
+		from member 
+		where member_id=#{memberId} and member_pw=#{memberPw}
+	</select>
+	
+	<!-- public void deleteMember(String memberId, String memberPw) -->
+	<delete id="deleteMember" parameterType="map">
+		delete from member where member_id=#{memberId} and member_pw=#{memberPw}  
+	</delete>
+	
+	<!-- public int insertMember(Member dto) 
+		#{mileage, jdbcType=NUMERIC}, #{manager, jdbcType=VARCHAR} null colum config -->
+	<insert id="insertMember" parameterType="com.side_on.dto.Member">
+		insert into member
+		values(#{memberId, jdbcType=VARCHAR}, #{memberPw, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR}, #{grade, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{mobile, jdbcType=VARCHAR}, #{entryDate, jdbcType=VARCHAR}, #{restCount, jdbcType=VARCHAR}, #{reward, jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<select id="idCheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM member WHERE memberId = #{memberId}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
