@@ -27,6 +27,6 @@ public interface MemberDao {
 	/** 회원가입 */
 	public int insertMember(Member dto);
 	
-	public int idCheck(Member dto) throws Exception;
+	public int idCheck(String memberId);
 
 }

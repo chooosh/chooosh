@@ -22,41 +22,82 @@
     <!-- Custom styles for this template-->
     <link href="../css/register_sh.css" rel="stylesheet">
 
-<script type="text/javascript">
-function idCheck(){
-    $.ajax({
-        url : "/member/register",
-        type : "post",
-        dataType : "json",
-        data : {"memberId" : $("#memberId").val()},
-        success : function(data){
-          if(data == 1){
-            alert("중복된 아이디입니다.");
-            console.log("### 중복된 아이디");
-          }else if(data == 0){
-            $("#memberIdCheck").attr("value", "Y");
-            alert("사용가능한 닉네임입니다.");
-          }
-        }
-      })
-    }
 
-    </script>
+<script type="text/javascript">
+
+function checkForm() {
+	// 아이디 입력 데이터 가져오기 : id
+	var memberId = document.getElementById("memberId").value;
+	console.log("memberId: ", memberId.length);
+	// 데이터 검증
+	if (memberId == "" || memberId.trim().length == 0) {
+		document.getElementById("memberId").focus();
+		document.getElementById("memberIdMsg").innerHTML = "아이디를 입력하세요";
+		document.getElementById("memberIdMsg").style.color = "red";
+		document.getElementById("memberId").value = ""; // 사용자 입력데이터를 공백문자열 초기화
+		return false; // input type="submit"
+	}
+	memberId = memberId.trim();	// 사용자 입력데이터에 있는 공백제거 
+	console.log("memberId: ", memberId.length);
+
+	// 비밀번호 입력 데이터 가져오기 : name
+	var memberPw = document.register.memberPw.value;
+	console.log("memberPw: ", memberPw);
+	
+	if (memberPw == "" || memberPw.trim().length == 0) {
+		document.getElementById("memberPw").focus();
+		document.getElementById("memberPwMsg").innerHTML = "비밀번호를 입력하세요";
+		document.getElementById("memberPwMsg").style.color = "red";
+		document.getElementById("memberPw").value = "";
+		//return false; // input type="submit"
+		return;
+	}
+	memberPw = memberPw.trim();
+	
+	// 비밀번호 확인 입력 데이터 가져오기 :
+	var memberPw2 = document.getElementById("memberPw2").value;
+	console.log("memberPw2: ", memberPw2);
+	
+	if (memberPw2 == "" || memberPw2.trim().length == 0) {
+		document.getElementById("memberPw2").focus();
+		document.getElementById("memberPwConfirmMsg").innerHTML = "비밀번호확인을 입력하세요";
+		document.getElementById("memberPwConfirmMsg").style.color = "red";
+		document.getElementById("memberPw").value = "";
+		//return false; // input type="submit"
+		return;
+	}
+	memberPw2 = memberPw2.trim();
+	
+	// 실습 : 비밀번호와 비밀번호확인 매칭 검증
+	if (memberPw != memberPw2) {
+		document.getElementById("memberPw").focus();
+		document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
+		document.getElementById("memberPwMsg").style.color = "red";
+		//return false;
+		return;
+	}
+	
+	</script>
 
 
 </head>
 
-<body class="bg-gradient-warning">
+<body class="" style="background-color: #FFD026" >
    <!-- navibar -->
        <%@ include file="../inc/header.jsp" %>
-    <div class="container">
+    <div class="container" >
+
+	<!-- Outer Row -->
+        <div class="row justify-content-center" >
+
+            <div class="col-xl-8 col-lg-6 col-md-8">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-login-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-5 d-none d-lg-block"></div>
+                    <div class="col-lg-12">
                         <div class="p-5">
                         
                         <br>
@@ -74,28 +115,31 @@ function idCheck(){
                                <!-- 아이디 -->
                                 <div class="col-sm-8 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user" id="memberId" name="memberId"
-                                        placeholder="아이디" pattern="[A-Za-z0-9]{1,20}" maxlength="20" required="required">
+                                        placeholder="아이디" pattern="[A-Za-z0-9]{1,20}" maxlength="20" required="required" onkeydown="clearMsg()">
+                               		<span id="memberIdMsg"></span>
                                 </div>
                                 
                                 <!-- onclick 함수 -->
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                    <input type="button" value="중복확인" id="memberIdCheck" name="memberIdCheck" class="btn btn-outline-warning btn-user btn-block" 
-                                   onclick="idCheck()" value="N">
-                                   
-                                </a>
+                                   onclick="idCheck()">
                                 </div>
+                                
                                 </div>
                                 
                                 <!-- 비밀번호 -->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPw" name="memberPw" placeholder="비밀번호" maxlength="30" required="required">
+                                            id="memberPw" name="memberPw" placeholder="비밀번호" pattern="[a-z0-9]{6,30}" maxlength="30" required="required" onchange="pwCheck()">
+                                   		<span id="memberPwMsg"></span>
                                    	</div>
+                                   	
                                    <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPwCheck" name="memberPwCheck" placeholder="비밀번호 확인" maxlength="30" required="required">
+                                            id="memberPw2" name="memberPw2" placeholder="비밀번호 확인" pattern="[a-z0-9]{6,30}" maxlength="30" required="required" onblur="checkMappingMemberPw()">
+                                    <span id="memberPwConfirmMsg"></span>
                                     </div>
-                				
+                					
                 				<!-- 이름 -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="name" name="name"
@@ -123,7 +167,7 @@ function idCheck(){
                               	
                               	
                                 <input type="submit" value='완료' class="btn btn-primary btn-user btn-block" 
-                                onclick="Check(); finalCheck();">
+                                onclick="return checkForm();">
                                 
                                 <a href="/" class="btn btn-danger btn-user btn-block">
                                    취소

@@ -1,9 +1,11 @@
 package com.side_on.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.side_on.dao.MemberDao;
 import com.side_on.dto.Member;
@@ -72,9 +74,11 @@ public class MemberService {
 		return result;
 	}
 
-	public int idCheck(Member dto) throws Exception {
-		int result = memberDao.idCheck(dto);
-		return result;
+	public HashMap<String, Object> idCheck(String memberId, Model model) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int use = memberDao.idCheck(memberId);
+		map.put("use", use); //아이디가 존재하면 1, 없으면 0
+		return map;
 	}
 
 }

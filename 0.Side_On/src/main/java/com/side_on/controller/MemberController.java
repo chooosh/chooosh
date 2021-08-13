@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.side_on.dto.Member;
@@ -117,11 +119,11 @@ public class MemberController {
 		return "member/test";
 	}
 
-	@ResponseBody
-	@RequestMapping("/member/register/idCheck")
-	public int idCheck(Member dto) throws Exception {
-	  int result = memberService.idCheck(dto);
-	  return result;
-	}
+//	@RequestMapping(value = "/member/idCheck",  method = RequestMethod.POST)
+//	public @ResponseBody HashMap<String, Object> idCheck(Model model, @RequestParam String memberId) {
+//		log.info("### 아이디 :: " + memberId);
+//		 return memberService.idCheck(memberId, model);
+//		 
+//	}
 	  
 }

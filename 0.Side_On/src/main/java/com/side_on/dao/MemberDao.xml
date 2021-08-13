@@ -7,7 +7,7 @@
 	<select id="login" resultType="String" parameterType="map">
 		select grade 
 		from member 
-		where member_id = #{memberId} and member_pw = #{memberPw}
+		where member_id = #{memberId} and member_pw =#{memberPw}
 	</select>
 	
 	<!-- public Member loginToMember(String memberId, String memberPw) -->
@@ -26,12 +26,22 @@
 		#{mileage, jdbcType=NUMERIC}, #{manager, jdbcType=VARCHAR} null colum config -->
 	<insert id="insertMember" parameterType="com.side_on.dto.Member">
 		insert into member
-		values(#{memberId, jdbcType=VARCHAR}, #{memberPw, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR}, #{grade, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{mobile, jdbcType=VARCHAR}, #{entryDate, jdbcType=VARCHAR}, #{restCount, jdbcType=VARCHAR}, #{reward, jdbcType=VARCHAR})
+		values(#{memberId}, #{memberPw}, #{email}, #{grade}, #{name}, #{mobile}, #{entryDate}, #{restCount},
+		#{reward})
 	</insert>
 	
+	<!-- public Member selectOneToDto(String loginMemberId) -->
+	<select id="selectOneToDto" resultType="com.side_on.dto.Member">
+  	        select * from member where member_id = #{memberId}
+        </select>
+  
+  <!-- public int updateMember(String memberId, String memberPw, String name, String mobile, String email) -->
+        <update id="updateMember"  parameterType="com.side_on.dto.Member">
+  	        update member set member_pw=#{memberPw}, email=#{email}, name=#{name}, mobile=#{mobile} where member_id=#{memberId}
+        </update>
 	
 	<select id="idCheck" parameterType="String" resultType="Integer">
-      SELECT COUNT(*) FROM member WHERE memberId = #{memberId}
+      SELECT COUNT(*) FROM member WHERE member = #{memberId}
 	</select>
 	
 </mapper>

@@ -29,12 +29,17 @@
 				</div>
 			</div>
         </header>
+        <script type="text/javascript">
+        function finalCheck() {
+        	alret("입력하신 정보로 글을 작성하시겠습니까?");
+        }
+        </script>
         
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="justify-content-center">
-                     <form>
+     <form action="/find/formDone" method="post">
   <fieldset>
 	<div class="justify-content-center text-center">
 	<h2>
@@ -46,41 +51,51 @@
 	
     <div class="form-group">
       <label for="exampleInputTitle" class="form-label mt-4">제목</label>
-      <input type="title" class="form-control" id="exampleInputTitle" aria-describedby="title" placeholder="목록에 보여질 제목을 작성해주세요.">
+      <input type="text" class="form-control" id="find_title" name="find_title" aria-describedby="title" placeholder="목록에 보여질 제목을 작성해주세요."
+      maxlength="30" required="required">
     </div>
 	
 	<div class="form-group">
-      <label for="exampleInputWriter" class="form-label mt-4">이름</label>
-      <input type="writer" class="form-control" id="exampleInputWriter" aria-describedby="writer" placeholder="본명을 사용해주세요.">
+      <label for="exampleInputWriter" class="form-label mt-4">아이디</label>
+      <input type="text" class="form-control" id="find_writer" name="find_writer" aria-describedby="writer" placeholder="본명을 사용해주세요." required="required">
       <small id="writer" class="form-text text-muted"></small>
     </div>
 	
    <div class="form-group">
       <label for="exampleInputAdress" class="form-label mt-4">거주지역</label>
-      <input type="adress" class="form-control" id="exampleInputAdress" aria-describedby="emailHelp" placeholder="ex) 서울시 강남구">
+      <input type="text" class="form-control" id="find_address" name="find_address" aria-describedby="emailHelp" placeholder="ex) 서울시 강남구" maxlength="20" required="required">
       <small id="adress" class="form-text text-muted"></small>
     </div>
 	
     <div class="form-group">
-      <label for="examplePosition" class="form-label mt-4">희망포지션</label>
-      <select class="form-select" id="examplePosition">
-        <option>백엔드</option>
-        <option>프론트엔드</option>
-        <option>풀스택</option>
-        <option>웹디자인</option>
-        <option>기획/마케팅</option>
-		<option>기타</option>
-      </select>
+      <label for="examplePosition" class="form-label mt-4" id="find_position" name="find_position" required="required">희망포지션</label>
+		<br>
+    	<input type="checkbox" id="find_position" name="find_position" value="Front-end(프론트)">
+  		<label for="position1">&nbsp;Front-end(프론트)</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="Back-end(백엔드)">
+  		<label for="position1">&nbsp;Back-end(백엔드)</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="AOS(안드로이드)">
+  		<label for="position1">&nbsp;AOS(안드로이드)</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="IOS(애플)">
+  		<label for="position1">&nbsp;IOS(애플)</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="Server(서버)">
+  		<label for="position1">&nbsp;Server(서버)</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="UI/UX">
+  		<label for="position1">&nbsp;UI/UX</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="기획">
+  		<label for="position1">&nbsp;기획</label><br>
+  		<input type="checkbox" id="find_position" name="find_position" value="PM(Project Manager)">
+  		<label for="position1">&nbsp;PM(Project Manager)</label><br>
     </div>
     
     <div class="form-group">
       <label for="exampleTextarea" class="form-label mt-4">자기소개</label>
-      <textarea class="form-control" id="exampleTextarea" placeholder="자유롭게 자신을 소개해주세요." rows="3"></textarea>
+      <textarea class="form-control" id="find_content" name="find_content" placeholder="자유롭게 자신을 소개해주세요. (500자 이내로 작성 가능합니다.)" rows="3" maxlength="500" required="required"></textarea>
 	   
     </div>
     <div class="form-group">
       <label for="formFile" class="form-label mt-4">대표 이미지</label>
-      <input class="form-control" type="file" id="formFile">
+      <input class="form-control" type="file" id="form_imgpath" name="form_imgpath">
 	  <small id="imgfile" class="form-text text-muted">대표 이미지는 목록에 보여집니다.</small>
     </div>
     
@@ -88,8 +103,8 @@
 	<br>
 	
 	<div class="justify-content-center text-center">
-    <a href="#"><button type="submit" class="btn btn-warning">등록</button></a>
-	<button type="reset" class="btn btn-light"><a href="list" style="color:black; text-decoration:none;">취소</a></button>
+    <a href="formDone"><input type="submit" value="등록" class="btn btn-warning" onclick="finalCheck()"></a>
+	<a href="list"><input type="button" value="취소" class="btn btn-light"></a>
 	</div>
   </fieldset>
 </form>
