@@ -154,7 +154,7 @@ function checkForm() {
                                 
                                 <!-- onclick 함수 -->
                                 <div class="col-sm-4 mb-3 mb-sm-0">
-                                   <input type="button" value="중복확인" onclick="openIdChekWindow()"class="btn btn-outline-warning btn-user btn-block">
+                                   <input type="button" value="중복확인" onclick="openIdChekWindow()" class="btn btn-outline-warning btn-user btn-block" >
                                 </div>
                                 
                                 </div>
