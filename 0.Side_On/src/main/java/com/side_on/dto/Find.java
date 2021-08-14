@@ -11,6 +11,7 @@
  @AllArgsConstructor
  public class Find {
  	
+ 	private int find_no;
  	
  	private String find_date;
  	

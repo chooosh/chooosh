@@ -29,7 +29,7 @@
 			<table class="inputTable">
 				<tr>
 					
-					<th><input type="text" name="userName" id="userName" value=memberId></th>
+					<th><input type="text" name="userName" id="userName" placeholder="채팅시 사용하실 이름을 입력해주세요."></th>
 					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
 				</tr>
 			</table>

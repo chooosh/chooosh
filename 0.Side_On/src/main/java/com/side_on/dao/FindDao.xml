@@ -10,6 +10,10 @@
 	</select>
 	-->
 	
+    <select id="findMemberTest" resultType="com.side_on.dto.Find">
+    	select find_no, find_title, find_writer from find_member
+    </select>
+    
 	<!--게시판 조회 
  	public List<Find> selectFindList() -->
 	<select id="findMemberList" resultType="com.side_on.dto.Find">
@@ -17,7 +21,7 @@
 	</select>
 	
 	<!-- 게시글 본문 조회 
-	public Find selectFindDetail(String find_writer); -->
+	public Find selectFindDetail(String find_no); -->
 	<select id="selectFindDetail"  parameterType="map" resultType="com.side_on.dto.Find">
 		select * from find_member where find_writer=#{find_writer}
 	</select>
@@ -26,7 +30,7 @@
 	public int insertFindMember(Find dto) -->
 	<insert id="insertFindMember" parameterType="com.side_on.dto.Find">
 		insert into find_member
-		values(#{find_date}, #{find_title}, #{find_writer}, #{find_address}, #{find_position}, #{find_imgpath}, #{find_content})
+		values(SEQ_FIND_MEMBER.nextval, #{find_date}, #{find_title}, #{find_writer}, #{find_address}, #{find_position}, #{find_imgpath}, #{find_content})
 	</insert>
 	
     <!-- 게시글 수정 	
@@ -40,13 +44,13 @@
 			find_imgpath = #{find_imgpath},
 			find_content = #{find_content}
 		WHERE
-			find_writer = #{find_writer}
+			find_no = #{find_no}
     </insert>
     
     <!-- 게시글 삭제 
-    public Find deleteFindList(String find_writer) --> 
+    public Find deleteFindList(int find_no) --> 
     <delete id="deleteFindList">
-		delete from find_member WHERE find_writer= #{find_writer}
+		delete from find_member WHERE find_no= #{find_no}
 	</delete>
   	
 

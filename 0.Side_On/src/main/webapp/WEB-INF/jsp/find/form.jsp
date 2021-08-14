@@ -103,7 +103,7 @@
 	<br>
 	
 	<div class="justify-content-center text-center">
-    <a href="formDone"><input type="submit" value="등록" class="btn btn-warning" onclick="finalCheck()"></a>
+    <input type="submit" value="등록" class="btn btn-warning">
 	<a href="list"><input type="button" value="취소" class="btn btn-light"></a>
 	</div>
   </fieldset>

@@ -3,6 +3,7 @@ package com.side_on.dao;
 import java.util.List;
 
 
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.side_on.dto.Find;
@@ -25,9 +26,11 @@ public interface FindDao {
 	public int updateFindMember(Find dto);
 
 	/** 게시글 삭제 */
-	public int deleteFindList(String find_writer);
+	public int deleteFindList(int find_no);
 
 	public List<Find> findMemberList();
 
+	public List<Find> findMemberTest() throws Exception;
+	
 
 }

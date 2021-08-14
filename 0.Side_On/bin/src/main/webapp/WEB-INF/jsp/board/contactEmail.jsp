@@ -23,22 +23,22 @@
 </div>
 
 <div class="int-area">
-<input type="text" class="mailForm" name="emial" id="email"
-       placeholder=" 답변 받으실 이메일을 입력해주세요." autocomplete="off" required>
+<input type="text" class="mailForm" name="emial" id="email" onmouseover="this.style.border = '2px solid #ffc800'" onmouseout="this.style.border = '1px solid #E0E0E0'"
+       placeholder=" 답변 받으실 이메일을 입력해주세요." autocomplete="off" required >
 
 </div>
 <div class="int-area">
-<input type="text" class="mailForm" name="title" id="title"
+<input type="text" class="mailForm" name="title" id="title" onmouseover="this.style.border = '2px solid #ffc800'" onmouseout="this.style.border = '1px solid #E0E0E0'"
        placeholder="문의 제목" autocomplete="off" required>
 </div>
 <div class="text-area">
-<p><textarea name="contents" class="textForm" id="contents"
+<p><textarea name="contents" class="textForm" id="contents" onmouseover="this.style.border = '2px solid #ffc800'" onmouseout="this.style.border = '1px solid #E0E0E0'"
      placeholder="문의 내용을 입력해주세요.."></textarea></p>
 </div>    
 
 
 <div class="btn-area">
-<button type="button" class="button" onclick="sendMail();">문의하기</button>
+<button type="button" class="button" onmouseover="this.style.border = '2px solid #ffc800'" onmouseout="this.style.border = '1px solid #E0E0E0'" onclick="sendMail();">문의하기</button>
 </div>
 
 </body>

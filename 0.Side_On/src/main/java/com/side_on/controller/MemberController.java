@@ -125,5 +125,16 @@ public class MemberController {
 //		 return memberService.idCheck(memberId, model);
 //		 
 //	}
-	  
+	
+	@RequestMapping("/member/idCheck")
+	public String idCheck() {
+		log.debug("### idCheck :: ");
+		return "member/idCheck";
+	}
+	 
+	@RequestMapping("/member/idCheckProc")
+	public String idCheckProc() {
+		log.debug("### idCheckProc :: ");
+		return "member/idCheckProc";
+	}
 }

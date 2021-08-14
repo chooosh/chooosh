@@ -22,70 +22,103 @@
     <!-- Custom styles for this template-->
     <link href="../css/register_sh.css" rel="stylesheet">
 
-
 <script type="text/javascript">
+	
+/* 아이디 중복확인 페이지 팝업 */
+function openIdChekWindow() {
+	var specs = "width=400,height=300,top=300,left=500";
+	var idWin = window.open("idCheck", "_blank", specs);
+}
 
+/* 유효성 체크 */
 function checkForm() {
 	// 아이디 입력 데이터 가져오기 : id
 	var memberId = document.getElementById("memberId").value;
 	console.log("memberId: ", memberId.length);
-	// 데이터 검증
-	if (memberId == "" || memberId.trim().length == 0) {
+	
+	// 아이디 길이 체크
+	if(memberId.trim().length < 5 || memberId.trim().length > 21) {
 		document.getElementById("memberId").focus();
-		document.getElementById("memberIdMsg").innerHTML = "아이디를 입력하세요";
+		document.getElementById("memberIdMsg").innerHTML = "아이디는 6자 이상, 20자 이하로 입력해주세요.";
 		document.getElementById("memberIdMsg").style.color = "red";
 		document.getElementById("memberId").value = ""; // 사용자 입력데이터를 공백문자열 초기화
 		return false; // input type="submit"
 	}
 	memberId = memberId.trim();	// 사용자 입력데이터에 있는 공백제거 
 	console.log("memberId: ", memberId.length);
-
+	
+	
 	// 비밀번호 입력 데이터 가져오기 : name
-	var memberPw = document.register.memberPw.value;
+	var memberPw = document.getElementById("memberPw").value;
 	console.log("memberPw: ", memberPw);
 	
-	if (memberPw == "" || memberPw.trim().length == 0) {
+	if if(memberPw == "" || memberPw.trim().length == 0) {
 		document.getElementById("memberPw").focus();
-		document.getElementById("memberPwMsg").innerHTML = "비밀번호를 입력하세요";
+		document.getElementById("memberPwMsg").innerHTML = "비밀번호는 6자 이상, 30자 이하로 입력해주세요.";
 		document.getElementById("memberPwMsg").style.color = "red";
 		document.getElementById("memberPw").value = "";
-		//return false; // input type="submit"
-		return;
+		return false; // input type="submit"
 	}
 	memberPw = memberPw.trim();
 	
 	// 비밀번호 확인 입력 데이터 가져오기 :
-	var memberPw2 = document.getElementById("memberPw2").value;
-	console.log("memberPw2: ", memberPw2);
+	var memberPwConfirm = document.getElementById("memberPwConfirm").value;
+	console.log("memberPwConfirm: ", memberPwConfirm);
 	
-	if (memberPw2 == "" || memberPw2.trim().length == 0) {
-		document.getElementById("memberPw2").focus();
+	if (memberPwConfirm == "" || memberPwConfirm.trim().length == 0) {
+		document.getElementById("memberPwConfirm").focus();
 		document.getElementById("memberPwConfirmMsg").innerHTML = "비밀번호확인을 입력하세요";
 		document.getElementById("memberPwConfirmMsg").style.color = "red";
 		document.getElementById("memberPw").value = "";
-		//return false; // input type="submit"
-		return;
+		return false; // input type="submit"
 	}
-	memberPw2 = memberPw2.trim();
+	memberPwConfirm = memberPwConfirm.trim();
 	
-	// 실습 : 비밀번호와 비밀번호확인 매칭 검증
-	if (memberPw != memberPw2) {
+	// 
+	if (memberPw != memberPwConfirm) {
 		document.getElementById("memberPw").focus();
 		document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
 		document.getElementById("memberPwMsg").style.color = "red";
-		//return false;
-		return;
+		return false; 
 	}
 	
-	</script>
+	// 아이디 중복여부 검증 완료 여부 체크
+	var checkMemberIdResult = document.getElementById("checkMemberId").value;
+	if (checkMemberIdResult != "SUCCESS") {
+		document.getElementById("memberId").focus();
+		document.getElementById("memberIdMsg").innerHTML = "아이디 중복여부를 확인하시기 바랍니다.";
+		document.getElementById("memberIdMsg").style.color = "red";
+		return false;			
+	}
+	
+	function checkMappingMemberPw() {
+		var memberPw = document.getElementById("memberPw").value;
+		var memberPwConfirm = document.getElementById("memberPwConfirm").value;
+		
+		if (memberPw != memberPwConfirm) {
+			document.getElementById("memberPw").focus();
+			document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
+			document.getElementById("memberPwMsg").style.color = "red";
+			
+			// 입력 데이터 선택
+			document.getElementById("memberPw").select()
+			return false; 
+		}
+	}
+}
 
 
+</script>
+
+
+
+  
 </head>
 
 <body class="" style="background-color: #FFD026" >
    <!-- navibar -->
        <%@ include file="../inc/header.jsp" %>
-    <div class="container" >
+    <div class="container">
 
 	<!-- Outer Row -->
         <div class="row justify-content-center" >
@@ -107,22 +140,21 @@ function checkForm() {
                             </div>
                             
                             <!-- 회원가입 폼 -->
-                            <form action='/member/registerDone' method="post" class="user" id="register">
+                            <form action='/member/registerDone' method="post" id="register" class="user">
                                
-                               <!-- 이미지어케바꾸냐.. -->
                                 <div class="form-group row">
+                               <input type="hidden" name="checkMemberId" id="checkMemberId" value="FAIL">
                                
                                <!-- 아이디 -->
                                 <div class="col-sm-8 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user" id="memberId" name="memberId"
-                                        placeholder="아이디" pattern="[A-Za-z0-9]{1,20}" maxlength="20" required="required" onkeydown="clearMsg()">
+                                        placeholder="아이디" pattern="[A-Za-z0-9_-]{1,20}" maxlength="20" required="required">
                                		<span id="memberIdMsg"></span>
                                 </div>
                                 
                                 <!-- onclick 함수 -->
                                 <div class="col-sm-4 mb-3 mb-sm-0">
-                                   <input type="button" value="중복확인" id="memberIdCheck" name="memberIdCheck" class="btn btn-outline-warning btn-user btn-block" 
-                                   onclick="idCheck()">
+                                   <input type="button" value="중복확인" onclick="openIdChekWindow()"class="btn btn-outline-warning btn-user btn-block">
                                 </div>
                                 
                                 </div>
@@ -130,26 +162,26 @@ function checkForm() {
                                 <!-- 비밀번호 -->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPw" name="memberPw" placeholder="비밀번호" pattern="[a-z0-9]{6,30}" maxlength="30" required="required" onchange="pwCheck()">
+                                            id="memberPw" name="memberPw" placeholder="비밀번호" pattern="[a-z0-9]{1,30}" maxlength="30" required="required" onblur="checkMappingMemberPw()">
                                    		<span id="memberPwMsg"></span>
                                    	</div>
                                    	
                                    <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPw2" name="memberPw2" placeholder="비밀번호 확인" pattern="[a-z0-9]{6,30}" maxlength="30" required="required" onblur="checkMappingMemberPw()">
-                                    <span id="memberPwConfirmMsg"></span>
+                                            id="memberPwConfirm" name="memberPwConfirm" placeholder="비밀번호 확인" pattern="[a-z0-9]{1,30}" maxlength="30" required="required">
+                                    <span id="memberPwConfirm"></span>
                                     </div>
                 					
                 				<!-- 이름 -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="name" name="name"
-                                        placeholder="이름" pattern="[a-zA-Z가-힣]{1,10}" maxlength="10" required="required">
+                                        placeholder="이름" pattern="[a-zA-Z가-힣]{2,30}" required="required">
                                 </div>
                                 
-                                <!-- 이메일 / 이메일 인증 pattern ? -->
+                                <!-- 이메일 -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="email" name="email"
-                                        placeholder="이메일 ex)id@mail.com" pattern="[a-zA-z_-@.]{1,40}" maxlength="40" required="required">
+                                        placeholder="이메일 ex)id@mail.com" pattern="[a-zA-z_-@.]{2,40}" maxlength="40" required="required">
                                 </div>
                                 
                                 <!-- 핸드폰번호 -->
@@ -159,16 +191,13 @@ function checkForm() {
                                         placeholder="핸드폰번호 ex)010-0000-0000" pattern="\d{3}-\d{3,4}-\d{4}" maxlength="13" required="required">
                                 </div>
                                  <div class="col-sm-4 mb-3 mb-sm-0">
-                                   <a href="#" class="btn btn-outline-warning btn-user btn-block">
-                                   인증
-                                </a>
+                                   <input type="button" value="인증" class="btn btn-outline-warning btn-user btn-block">
                                 </div>
                                 </div>
                               	
                               	
-                                <input type="submit" value='완료' class="btn btn-primary btn-user btn-block" 
-                                onclick="return checkForm();">
-                                
+                                <input type="submit" value='완료' class="btn btn-primary btn-user btn-block" onclick="return checkForm();">                                
+                               	<input type="button" onclick="return checkForm();">
                                 <a href="/" class="btn btn-danger btn-user btn-block">
                                    취소
                                 </a>
@@ -185,7 +214,8 @@ function checkForm() {
         </div>
 
     </div>
-
+   </div>
+   </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

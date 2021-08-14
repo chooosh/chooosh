@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -64,17 +63,20 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                <!-- title-->
-                             
-        	                            <h5 class="fw-bolder"> ${dto.find_title}</h5>
-                                	
+                               
+        	                            <h5 class="fw-bolder">제목</h5>
+                                <!-- id -->
+                                	exokai
+                                 
                                 	</div>
                             </div>
                             <!-- detail link-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="#">더 보러 가기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="detail?find_no=">더 보러 가기</a></div>
                             </div>
                         </div>
                     </div>
+                    <c:forEach var="find" items="${list}" varStatus="status">
                       <div class="col mb-5">
                         <div class="card h-100">
                             <!-- image -->
@@ -82,33 +84,18 @@
                             <!-- title-->
                             <div class="card-body p-4">
                                 <div class="text-center">
-                               
+                               		${find.find_title}
                                 </div>
                             </div>
+                            	${find.find_writer}
                             <!-- detail link-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="#">더 보러 가기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="detail?find_writer=${find.find_no}">더 보러 가기</a></div>
                             </div>
                         </div>
                     </div>
-                      <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- image -->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- title-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                </div>
-                            </div>
-                            <!-- detail link-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="#">더 보러 가기</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-              값 : ${dto.find_writer}
-               
+                        </c:forEach>
+                   
                <!-- 글쓰기 버튼 -->
 				<div class="text-center1">
 				<a href="form"><button type="button" class="btn btn-warning btn-lg">글쓰기</button></a>
@@ -133,16 +120,16 @@
 		</tr>
 	</c:if>
 	
-	<c:forEach var="dto" items="${list}" varStatus="status">
+	<c:forEach items="${list}" var="find" varStatus="status">
 		<tr>
 			<!-- status.index => 0시작, status.count => 1시작 -->
 			<th>${status.count}</th>
-			<th><a href="find/detail"> ${dto.find_title}</a></th>
-			<th>${dto.find_writer}</th>
-			<th>${dto.find_address}</th>
-			<th>${dto.find_position}</th>
-			<th>${dto.find_content}</th>
-			<th>${dto.find_date}</th>
+			<th><a href="find/detail"> ${find.find_title}</a></th>
+			<th>${find.find_writer}</th>
+			<th>${find.find_address}</th>
+			<th>${find.find_position}</th>
+			<th>${find.find_content}</th>
+			<th>${find.find_date}</th>
 		</tr>
 	</c:forEach>
 </table>
