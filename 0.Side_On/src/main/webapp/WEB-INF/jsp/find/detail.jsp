@@ -61,7 +61,7 @@
                 <br>
                   <div style='float:right;'>
                   <a href="form"><input type="button" class="btn btn-warning" value="수정"><a>
-                  <a href="find/detail/delete"><input type="button" class="btn btn-danger" value="삭제"></a>
+                  <a href="detail/delete"><input type="button" class="btn btn-danger" value="삭제"></a>
                   </div>
                   <button type="reset" class="btn btn-light" ><a href="list" style="color:black; text-decoration:none;">목록으로 가기</a></button>
             </div>

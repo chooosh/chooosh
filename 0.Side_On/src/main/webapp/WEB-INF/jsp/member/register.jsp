@@ -21,7 +21,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/register_sh.css" rel="stylesheet">
-
 <script type="text/javascript">
 	
 /* 아이디 중복확인 페이지 팝업 */
@@ -29,84 +28,6 @@ function openIdChekWindow() {
 	var specs = "width=400,height=300,top=300,left=500";
 	var idWin = window.open("idCheck", "_blank", specs);
 }
-
-/* 유효성 체크 */
-function checkForm() {
-	// 아이디 입력 데이터 가져오기 : id
-	var memberId = document.getElementById("memberId").value;
-	console.log("memberId: ", memberId.length);
-	
-	// 아이디 길이 체크
-	if(memberId.trim().length < 5 || memberId.trim().length > 21) {
-		document.getElementById("memberId").focus();
-		document.getElementById("memberIdMsg").innerHTML = "아이디는 6자 이상, 20자 이하로 입력해주세요.";
-		document.getElementById("memberIdMsg").style.color = "red";
-		document.getElementById("memberId").value = ""; // 사용자 입력데이터를 공백문자열 초기화
-		return false; // input type="submit"
-	}
-	memberId = memberId.trim();	// 사용자 입력데이터에 있는 공백제거 
-	console.log("memberId: ", memberId.length);
-	
-	
-	// 비밀번호 입력 데이터 가져오기 : name
-	var memberPw = document.getElementById("memberPw").value;
-	console.log("memberPw: ", memberPw);
-	
-	if if(memberPw == "" || memberPw.trim().length == 0) {
-		document.getElementById("memberPw").focus();
-		document.getElementById("memberPwMsg").innerHTML = "비밀번호는 6자 이상, 30자 이하로 입력해주세요.";
-		document.getElementById("memberPwMsg").style.color = "red";
-		document.getElementById("memberPw").value = "";
-		return false; // input type="submit"
-	}
-	memberPw = memberPw.trim();
-	
-	// 비밀번호 확인 입력 데이터 가져오기 :
-	var memberPwConfirm = document.getElementById("memberPwConfirm").value;
-	console.log("memberPwConfirm: ", memberPwConfirm);
-	
-	if (memberPwConfirm == "" || memberPwConfirm.trim().length == 0) {
-		document.getElementById("memberPwConfirm").focus();
-		document.getElementById("memberPwConfirmMsg").innerHTML = "비밀번호확인을 입력하세요";
-		document.getElementById("memberPwConfirmMsg").style.color = "red";
-		document.getElementById("memberPw").value = "";
-		return false; // input type="submit"
-	}
-	memberPwConfirm = memberPwConfirm.trim();
-	
-	// 
-	if (memberPw != memberPwConfirm) {
-		document.getElementById("memberPw").focus();
-		document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
-		document.getElementById("memberPwMsg").style.color = "red";
-		return false; 
-	}
-	
-	// 아이디 중복여부 검증 완료 여부 체크
-	var checkMemberIdResult = document.getElementById("checkMemberId").value;
-	if (checkMemberIdResult != "SUCCESS") {
-		document.getElementById("memberId").focus();
-		document.getElementById("memberIdMsg").innerHTML = "아이디 중복여부를 확인하시기 바랍니다.";
-		document.getElementById("memberIdMsg").style.color = "red";
-		return false;			
-	}
-	
-	function checkMappingMemberPw() {
-		var memberPw = document.getElementById("memberPw").value;
-		var memberPwConfirm = document.getElementById("memberPwConfirm").value;
-		
-		if (memberPw != memberPwConfirm) {
-			document.getElementById("memberPw").focus();
-			document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
-			document.getElementById("memberPwMsg").style.color = "red";
-			
-			// 입력 데이터 선택
-			document.getElementById("memberPw").select()
-			return false; 
-		}
-	}
-}
-
 
 </script>
 
@@ -143,13 +64,12 @@ function checkForm() {
                             <form action='/member/registerDone' method="post" id="register" class="user">
                                
                                 <div class="form-group row">
-                               <input type="hidden" name="checkMemberId" id="checkMemberId" value="FAIL">
                                
                                <!-- 아이디 -->
                                 <div class="col-sm-8 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user" id="memberId" name="memberId"
-                                        placeholder="아이디" pattern="[A-Za-z0-9_-]{1,20}" maxlength="20" required="required">
-                               		<span id="memberIdMsg"></span>
+                                        placeholder="아이디" pattern="[A-Za-z0-9_-]{6,20}" maxlength="20" required="required">
+                               		<div id="memberIdMsg"></div>
                                 </div>
                                 
                                 <!-- onclick 함수 -->
@@ -162,33 +82,37 @@ function checkForm() {
                                 <!-- 비밀번호 -->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPw" name="memberPw" placeholder="비밀번호" pattern="[a-z0-9]{1,30}" maxlength="30" required="required" onblur="checkMappingMemberPw()">
-                                   		<span id="memberPwMsg"></span>
+                                            id="memberPw" name="memberPw" pattern="[a-z0-9!@#$%^&*_-+=]{6,30}" maxlength="30" required="required"
+                                            placeholder="비밀번호">
+                                   		<div id="memberPwMsg"></div>
                                    	</div>
                                    	
                                    <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="memberPwConfirm" name="memberPwConfirm" placeholder="비밀번호 확인" pattern="[a-z0-9]{1,30}" maxlength="30" required="required">
-                                    <span id="memberPwConfirm"></span>
+                                            id="memberPwConfirm" name="memberPwConfirm" pattern="[a-z0-9!@#$%^&*_-+=]{6,30}" maxlength="30" required="required"
+                                            placeholder="비밀번호">
+                                    	<div id="memberPwConfirmMsg"></div>
                                     </div>
                 					
                 				<!-- 이름 -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="name" name="name"
-                                        placeholder="이름" pattern="[a-zA-Z가-힣]{2,30}" required="required">
+                                        placeholder="이름" pattern="[a-zA-Z가-힣]{2,20}" required="required">
+                                	<div id="nameMsg"></div>
                                 </div>
                                 
                                 <!-- 이메일 -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="email" name="email"
                                         placeholder="이메일 ex)id@mail.com" pattern="[a-zA-z_-@.]{2,40}" maxlength="40" required="required">
+                               		<div id="emailMsg"></div>
                                 </div>
                                 
                                 <!-- 핸드폰번호 -->
                                   <div class="form-group row">
                                 <div class="col-sm-8 mb-3 mb-sm-0">
                                     <input type="tel" class="form-control form-control-user" id="mobile" name="mobile"
-                                        placeholder="핸드폰번호 ex)010-0000-0000" pattern="\d{3}-\d{3,4}-\d{4}" maxlength="13" required="required">
+                                        placeholder="핸드폰 번호 ex)010-0000-0000" pattern="\d{3}-\d{3,4}-\d{4}" maxlength="13" required="required">
                                 </div>
                                  <div class="col-sm-4 mb-3 mb-sm-0">
                                    <input type="button" value="인증" class="btn btn-outline-warning btn-user btn-block">
@@ -196,8 +120,11 @@ function checkForm() {
                                 </div>
                               	
                               	
-                                <input type="submit" value='완료' class="btn btn-primary btn-user btn-block" onclick="return checkForm();">                                
+                                <input type="submit" value='완료' class="btn btn-primary btn-user btn-block" onclick="checkForm(); emailCheck();">                                
+                               	<!-- 테스트용 
                                	<input type="button" onclick="return checkForm();">
+                               	-->
+                               	
                                 <a href="/" class="btn btn-danger btn-user btn-block">
                                    취소
                                 </a>
@@ -225,6 +152,67 @@ function checkForm() {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
+    <script type="text/javascript">
+	
+/* 비밀번호 유효성 체크 */
+function checkForm() {
+	
+	var memberId = document.getElementById("memberId").value;
+	
+	if(memberId.trim().length < 5 || memberId.trim().length > 21) {
+		document.getElementById("memberId").focus();
+		document.getElementById("memberIdMsg").innerHTML = "아이디는 6자 이상, 20자 이하로 입력해주세요.";
+		document.getElementById("memberIdMsg").style.color = "red";
+		document.getElementById("memberId").value = "";
+		return false; 
+	}
+	
+	
+	var memberPw = document.getElementById("memberPw").value;
+	if(memberPw.trim().length < 5 || memberPw.trim().length > 31) {
+		document.getElementById("memberPw").focus();
+		document.getElementById("memberPwMsg").innerHTML = "비밀번호는 6자 이상, 30자 이하로 입력해주세요.";
+		document.getElementById("memberPwMsg").style.color = "red";
+		document.getElementById("memberPw").value = "";
+		return false;
+	}
+	
+	var memberPw2 = document.getElementById("memberPwConfirm").value;
+	
+	if (memberPw != memberPw2) {
+		document.getElementById("memberPw").focus();
+		document.getElementById("memberPwMsg").innerHTML = "비밀번호와 비밀번호 확인이 동일하지 않습니다.";
+		document.getElementById("memberPwMsg").style.color = "red";
+		return false; 
+	}
+	
+	var name = document.getElementById("name").value;
+	
+	if(name.trim.length < 2 || name.trim().length > 20) {
+		document.getElementById("name").focus();
+		document.getElementById("nameMsg").innerHTML = "이름은 2글자 이상 입력해주세요.";
+		document.getElementById("nameMsg").style.color = "red";
+		document.getElementById("name").value = ""; 
+		return false; 
+	}
+}
+
+/* 이메일 문자 "@" 포함 체크*/
+function emailCheck() {
+ 
+ var email = document.getElementById("email").value;
+ var emailtext = "@";
+ if (email.indexOf(emailtext)!=-1) {
+ } else {
+	 	document.getElementById("email").focus();
+		document.getElementById("emailMsg").innerHTML = "이메일 형식에 따라 입력해주세요.";
+		document.getElementById("emailMsg").style.color = "red";
+		document.getElementById("email").value = ""; 
+		return false; 
+ }
+}
+    </script>
 
 </body>
 

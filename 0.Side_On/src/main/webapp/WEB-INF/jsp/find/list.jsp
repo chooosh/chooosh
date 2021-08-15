@@ -66,7 +66,7 @@
                                
         	                            <h5 class="fw-bolder">제목</h5>
                                 <!-- id -->
-                                	exokai
+                                	id
                                  
                                 	</div>
                             </div>

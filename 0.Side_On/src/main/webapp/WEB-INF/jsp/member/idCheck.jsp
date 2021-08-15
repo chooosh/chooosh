@@ -8,6 +8,7 @@
   <link href="../css/register_sh.css" rel="stylesheet">
 <script>
 /* 회원들의 아이디 정보를 배열 선언 및 저장 구조 */
+ // 배열 바꿔야지 
 var memberIdArray = ["user01", "user02", "user03"];
 
 /* 윈도우 로드 이벤트 */
@@ -88,10 +89,11 @@ function useMemberId() {
 	// 부모창의 아이디 중복체크 완료 설정
 	window.opener.document.getElementById("checkMemberId").value = "SUCCESS";
 	
-	// 자식창닫기
 	window.close();
 }
+
 </script>
+
 </head>
 <body>
 <div class="text-center" >
