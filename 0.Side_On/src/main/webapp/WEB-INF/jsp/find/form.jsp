@@ -31,7 +31,7 @@
         </header>
         <script type="text/javascript">
         function finalCheck() {
-        	alret("입력하신 정보로 글을 작성하시겠습니까?");
+        	alert("입력하신 정보로 글을 작성하시겠습니까?");
         }
         </script>
         
@@ -51,13 +51,13 @@
 	
     <div class="form-group">
       <label for="exampleInputTitle" class="form-label mt-4">제목</label>
-      <input type="text" class="form-control" id="find_title" name="find_title" aria-describedby="title" placeholder="목록에 보여질 제목을 작성해주세요."
-      maxlength="30" required="required">
+      <input type="text" class="form-control" id="find_title" name="find_title" aria-describedby="title" placeholder="제목은 2글자 이상, 15글자 이하로 작성해주세요."
+      minlength="2" maxlength="16" required="required">
     </div>
 	
 	<div class="form-group">
       <label for="exampleInputWriter" class="form-label mt-4">아이디</label>
-      <input type="text" class="form-control" id="find_writer" name="find_writer" aria-describedby="writer" placeholder="본명을 사용해주세요." required="required">
+      <input type="text" class="form-control" id="find_writer" name="find_writer" aria-describedby="writer" value="${dto.memberId}" readonly required="required">
       <small id="writer" class="form-text text-muted"></small>
     </div>
 	
@@ -90,7 +90,7 @@
     
     <div class="form-group">
       <label for="exampleTextarea" class="form-label mt-4">자기소개</label>
-      <textarea class="form-control" id="find_content" name="find_content" placeholder="자유롭게 자신을 소개해주세요. (500자 이내로 작성 가능합니다.)" rows="3" maxlength="500" required="required"></textarea>
+      <textarea class="form-control" id="find_content" name="find_content" placeholder="자유롭게 자신을 소개해주세요. (500자 이내로 작성 가능합니다.)" rows="3" maxlength="501" required="required"></textarea>
 	   
     </div>
     <div class="form-group">
@@ -103,7 +103,7 @@
 	<br>
 	
 	<div class="justify-content-center text-center">
-    <input type="submit" value="등록" class="btn btn-warning">
+    <input type="submit" value="등록" class="btn btn-warning" onclick="finalCheck()">
 	<a href="list"><input type="button" value="취소" class="btn btn-light"></a>
 	</div>
   </fieldset>

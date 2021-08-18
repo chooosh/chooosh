@@ -32,6 +32,8 @@
 			</div>
         </header>
         
+        <c:out value="${list}"></c:out>
+        
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -55,88 +57,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- image -->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- message box -->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                               <!-- title-->
-                               
-        	                            <h5 class="fw-bolder">제목</h5>
-                                <!-- id -->
-                                	id
-                                 
-                                	</div>
-                            </div>
-                            <!-- detail link-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="detail?find_no=">더 보러 가기</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <c:forEach var="find" items="${list}" varStatus="status">
+ <c:forEach var="find" items="${find}" varStatus="status">
                       <div class="col mb-5">
                         <div class="card h-100">
                             <!-- image -->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- title-->
                             <div class="card-body p-4">
                                 <div class="text-center">
-                               		${find.find_title}
+                                	<!-- title -->
+                               		<h5 class="fw-bolder">${find.find_title}</h5>
+                               		<!-- id -->
+                               		${find.find_writer}
                                 </div>
                             </div>
-                            	${find.find_writer}
                             <!-- detail link-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="detail?find_writer=${find.find_no}">더 보러 가기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-warning mt-auto" href="detail?find_no=${find.find_no}">더 보러 가기</a></div>
                             </div>
                         </div>
                     </div>
-                        </c:forEach>
+</c:forEach>
                    
+                   <div>
+                   <br>
+                   <br>
+                   </div>
                <!-- 글쓰기 버튼 -->
 				<div class="text-center1">
 				<a href="form"><button type="button" class="btn btn-warning btn-lg">글쓰기</button></a>
 				</div>
 			</div>
 
-    <!-- test -->                
-	<table class="container px-4 px-lg-5 mt-5">
-	<tr>
-		<th>글번호</th>
-		<th>제목</th>
-		<th>아이디</th>
-		<th>거주지역</th>
-		<th>포지션</th>
-		<th>내용</th>
-		<th>가입일</th>
-	</tr>
-	
-	<c:if test="${not empty message}">
-		<tr>
-			<th colspan=10>${message}</th>
-		</tr>
-	</c:if>
-	
-	<c:forEach items="${list}" var="find" varStatus="status">
-		<tr>
-			<!-- status.index => 0시작, status.count => 1시작 -->
-			<th>${status.count}</th>
-			<th><a href="find/detail"> ${find.find_title}</a></th>
-			<th>${find.find_writer}</th>
-			<th>${find.find_address}</th>
-			<th>${find.find_position}</th>
-			<th>${find.find_content}</th>
-			<th>${find.find_date}</th>
-		</tr>
-	</c:forEach>
-</table>
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Side-On 2021</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

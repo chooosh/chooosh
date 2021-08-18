@@ -32,21 +32,21 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="../img/teamplay.png" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">2021-08-08</div>
-                        <h1 class="display-5 fw-bolder">풀스택 개발자입니다</h1>
+                        <div class="small mb-1">${find.find_date}</div>
+                        <h1 class="display-5 fw-bolder">${find.find_title}</h1>
                         
                         <div class="fs-5 ">
-                            <span>홍길동</span>
+                            <span>${dto.memberId}</span>
                         </div>
                           <div class="fs-5">
-                            <span>서울시 강남구</span>
+                            <span>${find.find_address}</span>
                         </div>
                    
                    		<br>
                        	<div>
-                        <p class="lead">실무 프로젝트 다수 경험있습니다. 자세한 포트폴리오가 궁금하신 분은 hhh@naver.com으로 메일주세요.</p>
+                        <p class="lead">${find.find_content}</p>
                        	</div>
-                       	 <a class="badge bg-warning text-decoration-none link-light" href="#!">Full-stack</a>
+                       	 <a class="badge bg-warning text-decoration-none link-light">Full-stack</a>
                         <br>
                         <br>
                         <div class="d-flex">
@@ -61,7 +61,7 @@
                 <br>
                   <div style='float:right;'>
                   <a href="form"><input type="button" class="btn btn-warning" value="수정"><a>
-                  <a href="detail/delete"><input type="button" class="btn btn-danger" value="삭제"></a>
+                  <a href="detail/delete?find_no=${find.find_no}"><input type="button" class="btn btn-danger" value="삭제"></a>
                   </div>
                   <button type="reset" class="btn btn-light" ><a href="list" style="color:black; text-decoration:none;">목록으로 가기</a></button>
             </div>
