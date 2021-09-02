@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>메인페이지</title>
+</head>
+<body>
+<h3>전체목록</h3>
+<hr>
+<h3><a href="/member/form">멤버등록</a></h3>
+<table border="1">
+    <tr>
+        <th>아이디</th>
+        <th>비밀번호</th>
+        <th>이름</th>
+        <th>이메일</th>
+    </tr>
+    {% for m in mlist %} <!-- 반복문 -->
+    <tr>
+        <td>{{m.getId()}}</td>
+        <td>{{m.getPwd()}}</td>
+        <td><a href="/member/get?id={{m.getId()}}">{{m.getName()}}</a></td>
+        <td>{{m.getEmail()}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
